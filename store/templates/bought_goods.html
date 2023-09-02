@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your bought items</title>
+</head>
+<body>
+{% if goods %}
+{% for bought_good in goods %}
+
+            <h1>EII {{ bought_good["item_name"] }}</h1>
+<a href={{url_for('goods_info',index=bought_good.item_name)}}>
+More info
+</a>
+{% endfor %}
+{% else %}
+<p>You have nothing in your cart</p>
+{% endif %}
+
+</body>
+</html>

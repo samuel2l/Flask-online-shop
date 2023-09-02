@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>LOG IN</h1>
+<form method="POST"  >
+    {{form.hidden_tag()}}
+<!--line abv is equivalent of csrf_token in django-->
+
+    {{form.email.label}}
+    {{form.email(placeholder="edf@gmail.com")}}
+<br>
+<br>
+    {{form.password.label}}
+    {{form.password(placeholder="fbgorpewe")}}
+<br>
+<br>
+    {{form.submit()}}
+</form>
+<!--get_flashed_messages gets all the messages flashed in the for loop in the register route-->
+    {%with messages= get_flashed_messages(with_categories = true)%}
+    {% if messages %}
+    {% for category,message in messages %}
+<!--    point of if statement is just to make sure the messages var has actual message/data
+so if there is no message do nothing
+-->
+    <h1> {{message}}</h1>
+<!--   add proper styling from bootstrap or wherever to make it look nice-->
+<!--has a class called alert-danger-->
+<!--but since this could be any message the class should be called-->
+<!--alert-{category}
+add a btn too to allow you to cancel the msg
+see when time reach just come copy from the flask 6 hr vid
+-->
+    {% endfor %}
+    {% endif %}
+    {%endwith%}
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+<h1>CREATE YOUR ACCOUNT</h1>
+<form method="POST" >
+    {{form.hidden_tag()}}
+<!--line abv is equivalent of csrf_token in django-->
+    {{form.name.label(class="wfw") }}
+    {{form.name(class="form-input",placeholder="Samuel Adams")}}
+<!--class is useless here but just showing you can assign it a class for styling and other normal form tags like placehodler and shi-->
+<br>
+<br>
+
+    {{form.email.label}}
+    {{form.email(placeholder="edf@gmail.com")}}
+<br>
+<br>
+
+    {{form.amount_in_acc.label}}
+    {{form.amount_in_acc(placeholder="450.00")}}
+<br>
+<br>
+
+    {{form.password.label}}
+    {{form.password(placeholder="edf@gmail.com")}}
+<br>
+<br>
+
+    {{form.confirm_password.label}}
+    {{form.confirm_password(placeholder="edf@gmail.com")}}
+
+<br>
+<br>
+
+
+    {{form.submit()}}
+
+</form>
+
+<!--get_flashed_messages gets all the messages flashed in the for loop in the register route-->
+    {%with messages= get_flashed_messages(with_categories = true)%}
+    {% if messages %}
+    {% for category,message in messages %}
+<!--    point of if statement is just to make sure the messages var has actual message/data
+so if there is no message do nothing
+-->
+    <h1> {{message}}</h1>
+<!--   add proper styling from bootstrap or wherever to make it look nice-->
+<!--has a class called alert-danger-->
+<!--but since this could be any message the class should be called-->
+<!--alert-{category}
+add a btn too to allow you to cancel the msg
+see when time reach just come copy from the flask 6 hr vid
+-->
+    {% endfor %}
+    {% endif %}
+    {%endwith%}
+
+
+</body>
+<style>
+
+</style>
+
+</html>

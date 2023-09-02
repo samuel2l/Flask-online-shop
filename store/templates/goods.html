@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OUR GOODS</title>
+</head>
+<body>
+
+{% for good in goods %}
+
+            <h1>EII {{ good["name"] }}</h1>
+<a href={{url_for('goods_info',index=good.name)}}>
+More info
+</a>
+<div>
+
+    <form method="POST">
+    {{ buy_form.hidden_tag() }}
+  <input id="bought_product" name="bought_product" type="hidden" value="{{good.name}}">
+     {{ buy_form.submit() }}
+
+
+</form>
+<form method="POST">
+
+    {{ cart_form.hidden_tag() }}
+  <input id="add_to_cart" name="add_to_cart" type="hidden" value="{{good.name}}">
+     {{ cart_form.submit() }}
+
+</form>
+
+
+    </div>
+{% endfor %}
+
+
+</body>
+</html>
