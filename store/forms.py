@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, IntegerField
-from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError,NumberRange
+from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from store.models import Customer
 class RegisterForm(FlaskForm):
     #note the naming of the func, it must be of form: validate_nameoffield
@@ -28,3 +28,7 @@ class BuyProductForm(FlaskForm):
 
 class CartForm(FlaskForm):
     submit = SubmitField(label="Add to cart")
+
+class SearchForm(FlaskForm):
+    name = StringField(label = 'enter a brand,type or specific product')
+    submit = SubmitField(label="Search")

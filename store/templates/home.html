@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>HOME</title>
-</head>
-<body>
-{% if current_user.is_authenticated  %}
-<h2>Hey there {{current_user.name}}  </h2>
-{% else %}
-<h2>chale create account </h2>
-{% endif %}
+    <style>
+      body {
+  background-image: url('../static/homeimg3.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional: This keeps the background fixed while scrolling */
+  color:white;
 
-<a href="{{url_for('logout_page')}}">
-    Logout
-</a>
-</body>
+}
+
+    </style>
+  </head>
+  <body>
+    {% if current_user.is_authenticated %}
+    <h2>Hey there {{current_user.name}}</h2>
+    <a href="{{url_for('goods')}}">See products</a>
+    {% else %}
+    <h2>Create an account to join the train!!</h2>
+    {% endif %}
+
+    <a href="{{url_for('logout_page')}}"> Logout </a>
+    <a href="{{url_for('bought_items')}}"> Purchase History </a>
+    <a href="{{url_for('cart_items')}}"> Cart </a>
+  </body>
 </html>

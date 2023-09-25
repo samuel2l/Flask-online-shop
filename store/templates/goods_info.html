@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        img{
+        height:500px;
+        }
+
+    </style>
     <meta charset="UTF-8">
     <title>Product Info</title>
 </head>
 <body>
+<img src="../static/{{img}}">
             <h1>{{name }}</h1>
             <h2>{{ info }}</h2>
-            <h2>It costa {{ price }}$</h2>
+            <h2>It costs {{ price }}$</h2>
             <h2>{{amnt_in_stock}} pieces remain in stock</h2>
 
 </body>
