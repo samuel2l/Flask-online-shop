@@ -3,7 +3,7 @@ import smtplib
 from flask import render_template, redirect, url_for, flash, request
 from store import app
 from store.models import Item, Customer, BoughtItems, CartItems
-from store.forms import RegisterForm, LoginForm, CartForm, BuyProductForm, SearchForm
+from store.forms import RegisterForm, LoginForm, CartForm, BuyProductForm, SearchForm, RemoveProductForm
 from store import db
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -48,11 +48,14 @@ def goods():
                     category='danger')
 
         if add_to_cart_table:
-            cart_log = CartItems(customer_id=current_user.id, item_name=add_to_cart_table.name)
-            db.session.add(cart_log)
-            db.session.commit()
-            flash('Added to your cart', category='success')
-
+            already_in_cart = CartItems.query.order_by(CartItems.id).all()
+            if not already_in_cart:
+                cart_log = CartItems(customer_id=current_user.id, item_name=add_to_cart_table.name)
+                db.session.add(cart_log)
+                db.session.commit()
+                flash('Added to your cart')
+            else:
+                flash('Item already in your cart')
     goodss = Item.query.order_by(Item.name).all()
     return render_template("goods.html", goods=goodss, buy_form=buy_form, cart_form=cart_form, search_form=search_form)
 
@@ -135,8 +138,15 @@ def bought_items():
 @app.route('/cart')
 def cart_items():
     _cart_items = CartItems.query.filter_by(customer_id=current_user.id)
+    form = RemoveProductForm()
+    remove_from_cart = request.form.get('remove_from_cart')
 
-    return render_template("cart.html", goods=_cart_items)
+    if form.validate_on_submit():
+        remove_from_cart_table = Item.query.filter_by(name=remove_from_cart).first()
+        db.session.delete(remove_from_cart_table)
+        db.session.commit()
+        flash('Remove from your cart')
+    return render_template("cart.html", goods=_cart_items,form=remove_from_cart)
 
 
 @app.route("/filtered", methods=["GET", "POST"])
@@ -146,6 +156,8 @@ def filtered_products():
     search_product = search_form.name.data
     get_prod_from_db = Item.query.filter_by(name=search_product).all()
     if not get_prod_from_db:
-        return "<h1>Restaurant you are looking for does not exist </h1>"
+        return "<h1>Product you are looking for does not exist </h1>"
     else:
         return redirect(url_for('goods_info', index=search_product))
+
+

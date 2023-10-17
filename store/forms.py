@@ -32,3 +32,6 @@ class CartForm(FlaskForm):
 class SearchForm(FlaskForm):
     name = StringField(label = 'enter a brand,type or specific product')
     submit = SubmitField(label="Search")
+
+class RemoveProductForm(FlaskForm):
+    submit = SubmitField(label="Remove from cart")
