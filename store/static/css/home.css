@@ -1,0 +1,30 @@
+  body {
+  background-image: url('../home_bkg.avif');
+  background-size: cover;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color:white;
+}
+ body, html {
+            height: 100%;
+margin-top:10%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+font-size:1.1rem;
+        }
+
+a{
+text-decoration: None;
+color:yellow;
+}
+button{
+background-color: red;
+border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
