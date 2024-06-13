@@ -1,5 +1,4 @@
 import smtplib
-
 from flask import render_template, redirect, url_for, flash, request
 from store import app
 from store.models import Item, Customer, BoughtItems, CartItems
@@ -7,11 +6,9 @@ from store.forms import RegisterForm, LoginForm, CartForm, BuyProductForm, Searc
 from store import db
 from flask_login import login_user, logout_user, login_required, current_user
 
-
 @app.route("/")
 def home():
     return render_template('home.html')
-
 
 @app.route("/goods", methods=["GET", "POST"])
 @login_required

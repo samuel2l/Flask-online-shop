@@ -10,9 +10,7 @@
   background-repeat: no-repeat;
   background-attachment: fixed; /* Optional: This keeps the background fixed while scrolling */
   color:white;
-
 }
-
     </style>
   </head>
   <body>
@@ -22,7 +20,6 @@
     {% else %}
     <h2>Create an account to join the train!!</h2>
     {% endif %}
-
     <a href="{{url_for('logout_page')}}"> Logout </a>
     <a href="{{url_for('bought_items')}}"> Purchase History </a>
     <a href="{{url_for('cart_items')}}"> Cart </a>
