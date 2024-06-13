@@ -1,3 +1,12 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url();
+}
+
 .form-container {
     border: 1px solid #ccc;
     padding: 20px;
@@ -26,4 +35,16 @@ form {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin:5px;
+
 }
+.login{
+    background-color: beige;
+
+    grid-column: 1/span 2;
+    justify-content:center;
+    margin-right:40%;
+    margin-left:40%;
+
+}
+
