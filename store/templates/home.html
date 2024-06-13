@@ -5,23 +5,45 @@
     <title>HOME</title>
     <style>
       body {
-  background-image: url('../static/homeimg3.webp');
+  background-image: url('../static/home_bkg.avif');
   background-size: cover;
+  background-position:center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* Optional: This keeps the background fixed while scrolling */
+  background-attachment: fixed;
   color:white;
 }
+ body, html {
+            height: 100%;
+margin-top:10%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+font-size:1.1rem;
+        }
     </style>
   </head>
   <body>
     {% if current_user.is_authenticated %}
-    <h2>Hey there {{current_user.name}}</h2>
+        <a href="{{url_for('logout_page')}}"> Logout </a>
+
     <a href="{{url_for('goods')}}">See products</a>
-    {% else %}
-    <h2>Create an account to join the train!!</h2>
-    {% endif %}
-    <a href="{{url_for('logout_page')}}"> Logout </a>
-    <a href="{{url_for('bought_items')}}"> Purchase History </a>
+        <a href="{{url_for('bought_items')}}"> Purchase History </a>
     <a href="{{url_for('cart_items')}}"> Cart </a>
+    <h2 class="greeting">Hey there {{current_user.name}}</h2>
+    {% else %}
+
+
+
+    <h2 class="greeting">Hey there Create an account or log in to view the hottest products in the world!</h2>
+<button>
+     <a href="{{url_for('login_page')}}"> Login </a>
+
+</button>
+<button>
+     <a href="{{url_for('register_page')}}"> Sign Up </a>
+
+</button>
+
+  {%endif%}
   </body>
 </html>
