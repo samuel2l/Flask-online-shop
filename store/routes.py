@@ -33,12 +33,7 @@ def goods():
                 db.session.add(sales_log)
                 db.session.commit()
                 flash('Successful Purchase', category='success')
-                with smtplib.SMTP("smtp.gmail.com") as connection:
-
-                    connection.starttls()
-                    connection.login(user='sama29571@gmail.com', password='ynglmgyiscxlrnmp')
-                    connection.sendmail(from_addr='sama29571@gmail.com', to_addrs=current_user.email,
-                                        msg=f"Subject:Successful Purchase \n\n We recognize your purchase of {get_prod_from_db.name} for {get_prod_from_db.price}, please contact us on +23350389384 to give us your delivery details")
+                # #                         msg=f"Subject:Successful Purchase \n\n We recognize your purchase of {get_prod_from_db.name} for {get_prod_from_db.price}, please contact us on +23350389384 to give us your delivery details")
             else:
                 flash(
                     f'Account balance not enough. You currently have {current_user.amount_in_acc}$, top up {get_prod_from_db.price - current_user.amount_in_acc}$ to be able to purchase this item',
@@ -163,10 +158,50 @@ def search():
     search_form = SearchForm()
     if search_form.validate_on_submit():
         search_product = search_form.name.data
+    buy_form = BuyProductForm()
+    cart_form = CartForm()
+
+    if request.method == "POST":
+        bought_product = request.form.get('bought_product')
+        add_to_cart = request.form.get('add_to_cart')
+
+        get_prod_from_db = Item.query.filter_by(name=bought_product).first()
+        add_to_cart_table = Item.query.filter_by(name=add_to_cart).first()
+
+        if get_prod_from_db:
+
+            if current_user.amount_in_acc >= get_prod_from_db.price:
+                current_user.amount_in_acc -= get_prod_from_db.price
+                get_prod_from_db.amnt_in_stock -= 1
+                sales_log = BoughtItems(customer_id=current_user.id, item_name=get_prod_from_db.name)
+                db.session.add(sales_log)
+                db.session.commit()
+                flash('Successful Purchase', category='success')
+                with smtplib.SMTP("smtp.gmail.com") as connection:
+
+                    connection.starttls()
+                    connection.login(user='sama29571@gmail.com', password='ynglmgyiscxlrnmp')
+                    connection.sendmail(from_addr='sama29571@gmail.com', to_addrs=current_user.email,
+                                        msg=f"Subject:Successful Purchase \n\n We recognize your purchase of {get_prod_from_db.name} for {get_prod_from_db.price}, please contact us on +23350389384 to give us your delivery details")
+            else:
+                flash(
+                    f'Account balance not enough. You currently have {current_user.amount_in_acc}$, top up {get_prod_from_db.price - current_user.amount_in_acc}$ to be able to purchase this item',
+                    category='danger')
+
+        if add_to_cart_table:
+            already_in_cart = CartItems.query.order_by(CartItems.id).all()
+            if not already_in_cart:
+                cart_log = CartItems(customer_id=current_user.id, item_name=add_to_cart_table.name)
+                db.session.add(cart_log)
+                db.session.commit()
+                flash('Added to your cart')
+            else:
+                flash('Item already in your cart')
+
         # Perform the search with partial match
         get_prod_from_db = Item.query.filter(Item.name.like(f'%{search_product.capitalize()}%')).all()
         if not get_prod_from_db:
             return "<h1>Product you are looking for does not exist</h1>"
         else:
-            return render_template('filtered_products.html', items=get_prod_from_db)
-    return render_template('goods.html', form=search_form)
+            return render_template('filtered_products.html', items=get_prod_from_db,form=search_form, buy_form=buy_form, cart_form=cart_form)
+    return render_template('goods.html', form=search_form, buy_form=buy_form, cart_form=cart_form)
