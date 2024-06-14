@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./static/css/register.css">
     <meta charset="UTF-8">
     <title>Register</title>
 </head>
@@ -20,43 +21,34 @@
     {% endfor %}
     {% endif %}
     {%endwith%}
-
+<div class="form-container">
 <h1>CREATE YOUR ACCOUNT</h1>
 <form method="POST" >
     {{form.hidden_tag()}}
-
+<div class="form-group">
     {{form.name.label(class="wfw") }}
     {{form.name(class="form-input",placeholder="Samuel Adams")}}
 <!--class is useless here but just showing you can assign it a class for styling and other normal form tags like placehodler and shi-->
-<br>
-<br>
 
     {{form.email.label}}
     {{form.email(placeholder="edf@gmail.com")}}
-<br>
-<br>
 
     {{form.amount_in_acc.label}}
     {{form.amount_in_acc(placeholder="450.00")}}
-<br>
-<br>
 
     {{form.password.label}}
     {{form.password(placeholder="edf@gmail.com")}}
-<br>
-<br>
 
     {{form.confirm_password.label}}
     {{form.confirm_password(placeholder="edf@gmail.com")}}
-
-<br>
-<br>
-
-
+<div class="login">
     {{form.submit()}}
+</div>
 
+
+</div>
 </form>
-
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -4,7 +4,11 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url();
+    background-image: url('../login_bkg.jpg');
+      background-size: cover;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .form-container {
