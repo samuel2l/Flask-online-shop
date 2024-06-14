@@ -1,0 +1,36 @@
+body,html{
+    background-image: url('../login_bkg.jpg');
+      background-size: cover;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.product{
+
+background-color:red;
+margin-right:7%;
+margin-left:7%;
+
+display:grid;
+   grid-template-columns: repeat(12,1fr);
+padding:2%;
+height:300px;
+border-radius:20px;
+}
+#img{
+ border-radius: 5%;
+    grid-column: 1/span 5;
+    background-color:blue;
+}
+#name{
+    grid-column: 7/span 12;
+}
+.buttons{
+display:flex;
+gap:1rem;
+
+}
+a{
+text-decoration:none;
+color:black;
+}
