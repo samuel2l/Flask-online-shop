@@ -1,18 +1,46 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--{% if products %}-->
+<!--{% for product in products %}-->
+
+<!--            <h1> {{product.name}}</h1>-->
+
+<!--{% endfor %}-->
+<!--{% else %}-->
+<!--<h1>OOf we do not have what you are looking for</h1>-->
+<!--{% endif %}-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-{% if products %}
-{% for product in products %}
-
-            <h1> {{product.name}}</h1>
-
-{% endfor %}
-{% else %}
-<h1>OOf we do not have what you are looking for</h1>
-{% endif %}
+    <div class="container">
+        <h1>Search Results</h1>
+        {% if items %}
+            <ul>
+                {% for item in items %}
+                    <li>
+                        <h2>{{ item.name }}</h2>
+                        <p>{{ item.description }}</p>
+                        <p>Price: {{ item.price }}</p>
+                        <a href="{{ url_for('goods_info', index=item.id) }}">View Details</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No products found.</p>
+        {% endif %}
+    </div>
 </body>
 </html>

@@ -147,14 +147,26 @@ def cart_items():
 
 
 @app.route("/filtered", methods=["GET", "POST"])
-def filtered_products():
+# def filtered_products():
+#     search_form = SearchForm()
+#
+#     search_product = search_form.name.data
+#     # get_prod_from_db = Item.query.filter_by(name=search_product).all()
+#     get_prod_from_db = Item.query.filter(Item.name.like(f'%{search_product}%')).all()
+#     if not get_prod_from_db:
+#         return "<h1>Product you are looking for does not exist </h1>"
+#     else:
+#         return redirect(url_for('goods_info', index=search_product))
+
+
+def search():
     search_form = SearchForm()
-
-    search_product = search_form.name.data
-    get_prod_from_db = Item.query.filter_by(name=search_product).all()
-    if not get_prod_from_db:
-        return "<h1>Product you are looking for does not exist </h1>"
-    else:
-        return redirect(url_for('goods_info', index=search_product))
-
-
+    if search_form.validate_on_submit():
+        search_product = search_form.name.data
+        # Perform the search with partial match
+        get_prod_from_db = Item.query.filter(Item.name.like(f'%{search_product.capitalize()}%')).all()
+        if not get_prod_from_db:
+            return "<h1>Product you are looking for does not exist</h1>"
+        else:
+            return render_template('filtered_products.html', items=get_prod_from_db)
+    return render_template('goods.html', form=search_form)
