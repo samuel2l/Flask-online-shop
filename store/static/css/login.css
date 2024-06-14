@@ -39,7 +39,6 @@ form {
 
 }
 .login{
-    background-color: beige;
 
     grid-column: 1/span 2;
     justify-content:center;
