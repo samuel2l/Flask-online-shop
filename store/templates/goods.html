@@ -20,10 +20,12 @@
     {% endfor %}
     {% endif %}
     {%endwith%}
-    <form method="POST" action="/filtered">
+    <form method="POST" action="/filtered" >
    {{ search_form.hidden_tag() }}
+        <div class="container">
   <input id="search_product" name="name"  >
      {{ search_form.submit() }}
+        </div>
 
 </form>
 <br>

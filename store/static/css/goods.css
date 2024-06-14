@@ -5,9 +5,26 @@ body,html{
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+.container {
+    display: flex;
+    gap:2%;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-top:3%;
+
+}
+
+#search_product {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 15px; /* Rounded borders */
+    width: 300px; /* Adjust the width as needed */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
 
 .product{
-
 margin-right:7%;
 margin-left:7%;
 background-color: rgba(255, 255, 255, 0.3);
@@ -21,7 +38,7 @@ border-radius:20px;
 #img{
  border-radius: 5%;
     grid-column: 1/span 5;
-    background-color:blue;
+
 }
 #name{
     grid-column: 7/span 12;
